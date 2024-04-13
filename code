@@ -1,0 +1,61 @@
+#define vcc 6
+#define trigPin 5 //Define the Trigger pin of the Ultrasonic
+#define echoPin 4 //Define the Echo pin of the Ultrasonic
+#define gnd 3
+#define buzPin A4
+
+
+int ultrasonic()
+{
+  int duration, distance;
+  digitalWrite(trigPin, HIGH); //Write High for 1ms
+  delayMicroseconds(1000);// 1  mili sec
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH); //Time pulse in
+  distance = ((duration / 2) / 29.1); //Convert time to Cm
+  return distance;
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(vcc, OUTPUT);
+  pinMode(gnd, OUTPUT);
+  digitalWrite(vcc, HIGH);
+  digitalWrite(gnd, LOW);
+  pinMode(trigPin, OUTPUT); //Setup Trigger and Echo
+  pinMode(echoPin, INPUT);
+  pinMode(buzPin, OUTPUT);
+
+
+}
+
+void loop() {
+
+  int d = ultrasonic();
+  if (d >= 200 || d <= 0)
+  {
+    Serial.println("OUT OF RANGE");
+    digitalWrite(buzPin, LOW);
+    delay(50);
+  }
+  else
+  {
+    Serial.print("Distance is ");
+    Serial.print(d);
+    Serial.println(" Cm");
+    if (d < 70)
+    {
+      int timeDelay = map(d, 0, 80, 25, 300);
+      digitalWrite(buzPin, HIGH);
+      delay(timeDelay);
+      digitalWrite(buzPin, LOW);
+      delay(timeDelay);
+      
+      //    analogWrite(buzPin,timeDelay);
+      Serial.print("PWM - " + String(timeDelay));
+    }
+    delay(100);
+  }
+
+
+}
