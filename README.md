@@ -11,3 +11,9 @@ Components:
 9. Jumper wires - These are used to connect various components on the breadboard.
 10. Enclosure - It is used to protect the circuit and device.
 ![image](https://github.com/aryaaa324/Blind-Band-with-buzzer-using-Arduino/assets/142014069/8be41e73-5596-4b0e-8f98-a381f5323bae)
+Limitations:
+1. There is a requirement of a prior training of the blind person in order to use the device.
+2. The device cannot recognise objects.
+3. The device can’t differentiate between person or object ,it will simply sense it is an obstacle. 
+4. Doesn’t not protect from obstacles at face level or from above the head.
+5. Power consumption is more thus battery needs to be charged on the daily basis.
